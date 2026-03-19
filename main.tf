@@ -72,3 +72,23 @@ resource "azurerm_linux_virtual_machine" "vm" {
     version   = "latest"
   }
 }
+# 10 - Container Docker
+resource "azurerm_container_group" "container" {
+  name                = "aci-devoir01"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  ip_address_type     = "Public"
+  os_type             = "Linux"
+
+  container {
+    name   = "nginx"
+    image  = "nginx:latest"
+    cpu    = "0.5"
+    memory = "1.5"
+
+    ports {
+      port     = 80
+      protocol = "TCP"
+    }
+  }
+}
