@@ -50,18 +50,15 @@ resource "azurerm_network_interface" "nic" {
 }
 
 resource "azurerm_linux_virtual_machine" "vm" {
-  name                = "vm-devoir01"
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-  size                = "Standard_B1s"
-  admin_username      = "adminuser"
+  name                            = "vm-devoir01"
+  resource_group_name             = azurerm_resource_group.rg.name
+  location                        = azurerm_resource_group.rg.location
+  size                            = "Standard_B1s"
+  admin_username                  = "adminuser"
+  admin_password                  = "Devoir01@Azure!"
+  disable_password_authentication = false
 
   network_interface_ids = [azurerm_network_interface.nic.id]
-
-  admin_ssh_key {
-    username   = "adminuser"
-    public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC0dummy+key+for+terraform+devoir+azure+deployment+test+only=="
-  }
 
   os_disk {
     caching              = "ReadWrite"
